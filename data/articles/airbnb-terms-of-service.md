@@ -1,6 +1,7 @@
 # Airbnb Terms of Service
 
 Last Updated: February 5, 2026
+Source: https://www.airbnb.com/help/article/2908
 
 These Terms of Service (“Terms”) are a binding legal agreement between you and Airbnb that govern your use of the Airbnb Platform. When used in these Terms, “Airbnb,” “we,” “us,” or “our” refers to the Airbnb entity with whom you are contracting.
 
