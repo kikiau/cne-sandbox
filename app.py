@@ -124,33 +124,34 @@ if page == "Request Center":
             st.session_state.last_sources = sources
             st.session_state.search_query = query
 
-    if "last_answer" in st.session_state:
-        st.divider()
-        st.markdown("### Suggested Guidance")
-        st.write(st.session_state.last_answer)
+if "last_answer" in st.session_state:
+    st.divider()
+    st.markdown("### Direction & Guidance")
+    st.markdown(st.session_state.last_answer)
 
-        if st.session_state.get("last_sources"):
-            st.markdown("### Relevant Articles")
-            for src in st.session_state.last_sources:
-                st.markdown(f"- **{src}**")
+    if st.session_state.get("last_sources"):
+        st.markdown("### Relevant Articles")
+        for src in st.session_state.last_sources:
+            st.markdown(f"- **{src}**")
 
-        st.divider()
-        st.markdown("**Did this resolve your issue?**")
-        c1, c2 = st.columns(2)
-        with c1:
-            if st.button("Yes — resolved", use_container_width=True):
-                log_interaction(st.session_state.last_question, st.session_state.last_sources, True)
-                st.success("Logged as resolved. No ticket needed.")
-                for key in ["last_answer", "last_question", "last_sources", "search_query"]:
-                    st.session_state.pop(key, None)
-                st.rerun()
-        with c2:
-            if st.button("No — create ticket", type="primary", use_container_width=True):
-                log_interaction(st.session_state.last_question, st.session_state.last_sources, False)
-                st.info("Ticket would be created with this conversation pre-filled into the Brief Summary.")
-                for key in ["last_answer", "last_question", "last_sources", "search_query"]:
-                    st.session_state.pop(key, None)
-                st.rerun()
+    st.divider()
+    st.markdown("**Did this resolve your issue?**")
+    c1, c2 = st.columns(2)
+    with c1:
+        if st.button("Yes — resolved", use_container_width=True):
+            log_interaction(st.session_state.last_question, st.session_state.last_sources, True)
+            st.success("Logged as resolved. No ticket needed.")
+            for key in ["last_answer", "last_question", "last_sources", "search_query"]:
+                st.session_state.pop(key, None)
+            st.rerun()
+    with c2:
+        if st.button("No — create ticket", type="primary", use_container_width=True):
+            log_interaction(st.session_state.last_question, st.session_state.last_sources, False)
+            st.info("Ticket would be created with this conversation pre-filled into the Brief Summary.")
+            for key in ["last_answer", "last_question", "last_sources", "search_query"]:
+                st.session_state.pop(key, None)
+            st.rerun()
+
 
 elif page == "Metrics":
     st.title("Metrics")
