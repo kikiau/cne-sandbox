@@ -79,6 +79,10 @@ st.markdown("""
         font-weight: 600;
         margin: 0;
     }
+    .stTextArea textarea {
+        min-height: 140px !important;
+        font-size: 16px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -101,11 +105,12 @@ if page == "Request Center":
             st.session_state.run_search = True
             st.rerun()
 
-    query = st.text_input(
+    query = st.text_area(
         "Describe your issue",
         value=st.session_state.get("search_query", ""),
-        placeholder="Search for self-help or create a ticket...",
-        label_visibility="collapsed"
+        placeholder="Describe the issue in detail (e.g. Guest reported an unplugged security camera in the living room...)",
+        label_visibility="collapsed",
+        height=140
     )
 
     if st.button("Get Self-Help", type="primary") or st.session_state.get("run_search"):

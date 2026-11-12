@@ -17,18 +17,24 @@ retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 
 prompt = ChatPromptTemplate.from_template("""
-You are a helpful Community Policy assistant. Answer the user's issue using ONLY the information from the provided policy articles.
+You are a Community Policy assistant. Use ONLY the provided policy articles to answer.
 
-If the articles contain relevant information, give a clear, direct answer and mention the specific policy points.
-If the articles do not contain enough information to answer fully, say so briefly and still share whatever relevant guidance is available.
+Rules:
+- Give a clear, practical answer based on the articles.
+- Quote or paraphrase specific policy points when possible.
+- If the articles do not fully cover the issue, say exactly what is covered and what is not.
+- Do not invent policies or give generic advice.
+- Always end by listing the relevant article names you used.
 
-Context from policy articles:
+Context:
 {context}
 
-User issue: {question}
+User issue:
+{question}
 
 Answer:
 """)
+
 
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
